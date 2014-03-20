@@ -6,8 +6,8 @@ have to deal with. Optimized for PHP and JS. Based on Ikar and Josef configurati
 ## Installation
 If you can use tern.js and jsctags for generation javascript tags, You must
 install tern and jsctags module for node.js. Reade more here:
-https://github.com/ramitos/jsctags
-http://ternjs.net/
+ - https://github.com/ramitos/jsctags
+ - http://ternjs.net/
 
 ## TODO
  - set css and js syntax for TagBar
