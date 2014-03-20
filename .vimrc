@@ -1,10 +1,11 @@
-" Modeline and Notes {
-"	vim: set foldmarker={,} foldmethod=marker:
-"
-"	Hosted on github: TODO
+" Notes {
+"	Hosted on github
+"	Based on vimrc by Ikar: http://github.com/porn
+"	Append by Josef: http://github.com/josef-spak
+"	Append by me :)
 " }
 
-" TODO unsorted ... {
+" Unsorted ... {
 	runtime! debian.vim
 
 	" php function text object
@@ -98,7 +99,7 @@
 		inoremap <F4> </><ESC>2F<yef/pF<xF<i
 
 		" toggle taglist (taglist plugin)
-		map <F4> :TlistToggle<CR>
+		map <F4> :TagbarToggle<CR>
 
 		" toggle paste / nopaste
 		set pastetoggle=<F5>
@@ -199,22 +200,54 @@
 		nmap <leader>vv :VCSVimDiff<CR>
 	" }
 
+	" JSHint {
+		" by default: <leader>js
+		nmap <leader>js :JSHint<CR>
+	" }
+
 	" php-doc commands {
 		nnoremap <C-P> :call PhpDocSingle()<CR>
 		vnoremap <C-P> :call PhpDocRange()<CR>
 	" }
 
-	" TagList {
-		" set the names of flags
-		let tlist_php_settings = 'php;c:class;d:constant;f:function'
-		" close all folds except for current file
-		let Tlist_File_Fold_Auto_Close = 1
+	" TagBar {
+		" open window with tagBar on the left
+		let g:tagbar_left = 1
+		" sort tags by open file
+		let g:tagbar_sort = 0
+		" show kind of function
+		let g:tagbar_show_visibility = 1
 		" make tlist pane active when opened
-		let Tlist_GainFocus_On_ToggleOpen = 1
+		let g:tagbar_autofocus = 1
 		" width of window
-		let Tlist_WinWidth = 40
-		" close tlist when a selection is made
-		let Tlist_Close_On_Select = 1
+		let g:tagbar_width = 35
+		" close tagbar when a selection is made
+		let g:tagbar_autoclose = 1
+		" set visible values for php
+		let g:tagbar_type_php = {
+			\ 'ctagstype' : 'php',
+			\ 'kinds' : [
+				\ 'd:macros:1',
+				\ 'g:enums',
+				\ 't:typedefs:0:0',
+				\ 'e:enumerators:0:0',
+				\ 'n:namespaces',
+				\ 'c:classes',
+				\ 's:structs',
+				\ 'u:unions',
+				\ 'f:functions'
+			\ ]
+		\ }
+		" TODO: append support for css and full js
+		" set visible values for php
+		" let g:tagbar_type_css = {
+		"	\ 'ctagstype' : 'css',
+		"   \ 'kinds'     : [
+		"       \ 'c:classes',
+		"       \ 's:selectors',
+		"       \ 'i:identities'
+		"   \ ]
+		"\ }
 	" }
 
 " }
