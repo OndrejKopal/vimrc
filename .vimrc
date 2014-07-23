@@ -8,6 +8,54 @@
 " Unsorted ... {
 	runtime! debian.vim
 
+	" Vundle .... {
+		set nocompatible              " be iMproved, required
+		filetype off                  " required
+
+		" set the runtime path to include Vundle and initialize
+		set rtp+=~/.vim/bundle/Vundle.vim
+		call vundle#begin()
+		" alternatively, pass a path where Vundle should install plugins
+		"call vundle#begin('~/some/path/here')
+
+		" let Vundle manage Vundle, required
+		Plugin 'gmarik/Vundle.vim'
+
+		" The following are examples of different formats supported.
+		Plugin 'tpope/vim-fugitive.git'
+		Plugin 'tpope/vim-repeat.git'
+		Plugin 'tpope/vim-surround.git'
+		Plugin 'tpope/vim-unimpaired.git'
+		Plugin 'tpope/vim-speeddating.git'
+		Plugin 'sjl/gundo.vim.git'
+		Plugin 'nelstrom/vim-visual-star-search.git'
+		Plugin 'majutsushi/tagbar'
+		Plugin 'chikamichi/mediawiki.vim.git'
+		Plugin 'chase/vim-ansible-yaml'
+		Plugin 'vim-scripts/vcscommand.vim'
+		Plugin 'digitaltoad/vim-jade'
+		Plugin 'kchmck/vim-coffee-script'
+		Plugin 'sumpygump/php-documentor-vim'
+		Plugin 'Valloric/YouCompleteMe'
+
+		" All of your Plugins must be added before the following line
+		call vundle#end()            " required
+		filetype plugin indent on    " required
+		" To ignore plugin indent changes, instead use:
+		"filetype plugin on
+		"
+		" Brief help
+		" :PluginList       - lists configured plugins
+		" :PluginInstall    - installs plugins; append `!` to update or just
+		" :PluginUpdate
+		" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+		" :PluginClean      - confirms removal of unused plugins; append `!` to
+		" auto-approve removal
+		"
+		" see :h vundle for more details or wiki for FAQ
+		" Put your non-Plugin stuff after this line"
+	" Vundle end ... }
+
 	" php function text object
 	vnoremap af :<C-U>normal va{o{<CR>
 	omap af :normal Vaf<CR>
@@ -59,7 +107,7 @@
 		autocmd CmdwinLeave * nnoremap <Return> zA
 
 		" move the line with the tag definition at top of window when jumping
-		map <C-]> <C-]>zt
+		" map <C-]> <C-]>zt
 		map g<LeftMouse> g<LeftMouse>zt
 
 	" }
