@@ -3,14 +3,9 @@
 My personal vim configuration being used on my laptop as well as on servers I
 have to deal with. Optimized for PHP and JS. Based on Ikar and Josef configuration.
 
-## Installation
-If you can use tern.js and jsctags for generation javascript tags, You must
-install tern and jsctags module for node.js. Reade more here:
- - https://github.com/ramitos/jsctags
- - http://ternjs.net/
-
 ## TODO
- - set css and js syntax for TagBar
+ - set css and js syntax
+ - generation js function tags for TagBar
 
 ## Hotkeys
 
