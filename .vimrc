@@ -34,9 +34,9 @@
 		Plugin 'chase/vim-ansible-yaml'
 		Plugin 'vim-scripts/vcscommand.vim'
 		Plugin 'digitaltoad/vim-jade'
+		" Plugin 'wookiehangover/jshint.vim'
 		Plugin 'kchmck/vim-coffee-script'
 		Plugin 'sumpygump/php-documentor-vim'
-		Plugin 'Valloric/YouCompleteMe'
 
 		" All of your Plugins must be added before the following line
 		call vundle#end()            " required
