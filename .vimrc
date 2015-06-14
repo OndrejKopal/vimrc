@@ -1,82 +1,108 @@
-" Notes {
-"	Hosted on github
-"	Based on vimrc by Ikar: http://github.com/porn
-"	Append by Josef: http://github.com/josef-spak
-"	Append by me :)
-" }
+" Notes {{{
+"       Hosted on github: https://github.com/OndrejKopal/vimrc
+"
+"       based on: https://github.com/porn/vimrc
+" }}}
 
-" Unsorted ... {
-	runtime! debian.vim
+" This line should not be removed as it ensures that various options are
+" properly set to work with the Vim-related packages available in Debian.
+runtime! debian.vim
 
-	" Vundle .... {
-		set nocompatible              " be iMproved, required
-		filetype off                  " required
+" Vundle ... {{{
+	set nocompatible              " be iMproved, required
+	filetype off                  " required
 
-		" set the runtime path to include Vundle and initialize
-		set rtp+=~/.vim/bundle/Vundle.vim
-		call vundle#begin()
-		" alternatively, pass a path where Vundle should install plugins
-		"call vundle#begin('~/some/path/here')
+	" set the runtime path to include Vundle and initialize
+	set rtp+=~/.vim/bundle/Vundle.vim
+	call vundle#begin()
+	" alternatively, pass a path where Vundle should install plugins
+	"call vundle#begin('~/some/path/here')
 
-		" let Vundle manage Vundle, required
-		Plugin 'gmarik/Vundle.vim'
+	" let Vundle manage Vundle, required
+	Plugin 'gmarik/Vundle.vim'
 
-		" The following are examples of different formats supported.
-		Plugin 'tpope/vim-fugitive.git'
-		Plugin 'tpope/vim-repeat.git'
-		Plugin 'tpope/vim-surround.git'
-		Plugin 'tpope/vim-unimpaired.git'
-		Plugin 'tpope/vim-speeddating.git'
-		Plugin 'sjl/gundo.vim.git'
-		Plugin 'nelstrom/vim-visual-star-search.git'
-		Plugin 'majutsushi/tagbar'
-		Plugin 'chikamichi/mediawiki.vim.git'
-		Plugin 'chase/vim-ansible-yaml'
-		Plugin 'vim-scripts/vcscommand.vim'
-		Plugin 'digitaltoad/vim-jade'
-		" Plugin 'wookiehangover/jshint.vim'
-		Plugin 'kchmck/vim-coffee-script'
-		Plugin 'sumpygump/php-documentor-vim'
+	" The following are examples of different formats supported.
+	" Keep Plugin commands between vundle#begin/end.
 
-		" All of your Plugins must be added before the following line
-		call vundle#end()            " required
-		filetype plugin indent on    " required
-		" To ignore plugin indent changes, instead use:
-		"filetype plugin on
-		"
-		" Brief help
-		" :PluginList       - lists configured plugins
-		" :PluginInstall    - installs plugins; append `!` to update or just
-		" :PluginUpdate
-		" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-		" :PluginClean      - confirms removal of unused plugins; append `!` to
-		" auto-approve removal
-		"
-		" see :h vundle for more details or wiki for FAQ
-		" Put your non-Plugin stuff after this line"
-	" Vundle end ... }
+    " Git plugins
+	Plugin 'tpope/vim-fugitive.git'
+
+    " Base plugins
+    Plugin 'tpope/vim-eunuch.git'
+	Plugin 'tpope/vim-repeat.git'
+	Plugin 'tpope/vim-surround.git'
+	Plugin 'tpope/vim-unimpaired.git'
+	Plugin 'tpope/vim-speeddating.git'
+	Plugin 'sjl/gundo.vim.git'
+	Plugin 'nelstrom/vim-visual-star-search.git'
+	Plugin 'majutsushi/tagbar.git'
+	Plugin 'vim-scripts/vcscommand.vim.git'
+	Plugin 'scrooloose/nerdtree.git'
+    Plugin 'scrooloose/syntastic.git'
+
+    " Php plugins
+	Plugin 'sumpygump/php-documentor-vim.git'
+
+    " Python plugins
+    Plugin 'jcrocholl/pep8.git'
+    Plugin 'fs111/pydoc.vim.git'
+    Plugin 'mitechie/pyflakes-pathogen.git'
+
+    " Js plugins
+    Plugin 'Shutnik/jshint2.vim.git'
+    Plugin 'kchmck/vim-coffee-script.git'
+
+	" All of your Plugins must be added before the following line
+	call vundle#end()            " required
+	filetype plugin indent on    " required
+
+	" Brief help
+	" :PluginList          - list configured plugins
+	" :PluginInstall(!)    - install (update) plugins
+	" :PluginSearch(!) foo - search (or refresh cache first) for foo
+	" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
+	"
+	" see :h vundle for more details or wiki for FAQ
+	" Put your non-Plugin stuff after this line
+
+" }}}
+
+" TODO unsorted ... {{{
+	" map %% to dir name of currently active buffer file
+	cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 	" php function text object
-	vnoremap af :<C-U>normal va{o{<CR>
+	vnoremap af :<C-U>normal va{Vo{<CR>
 	omap af :normal Vaf<CR>
 
 	set modeline
 	set runtimepath+=~/.vim/
 
-	" php offline manuals
-	set runtimepath+=~/.vim/doc
-	autocmd BufNewFile,Bufread *.php,*.php3,*.php4 set keywordprg="help"
+	" add HORIZONTAL ELLIPSIS (…) digraph
+	digraphs 3. 8230
+	" add DOUBLE EXCLAMATION MARK (‼) digraph
+	digraphs !! 8252
+
+	" http://vim.wikia.com/wiki/Ignore_white_space_in_vimdiff
+	if &diff
+		" diff mode
+		set diffopt+=iwhite
+	endif
 
 	" load .vimrc upon every save
 	if has("autocmd")
 		autocmd BufWritePost .vimrc source $MYVIMRC
 	endif
 
-" }
+" }}}
 
-" Key Mappings {
+" Key Mappings {{{
 
-	" Other {
+	" Other {{{
+
+		" vimdiff upon: "W11: Warning: File xxx has changed since editing started"
+		" taken from: http://stackoverflow.com/questions/8491110
+		command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 
 		" I don't find Ex mode much useful, also it bothers me to write visual
 		" all the time
@@ -105,14 +131,17 @@
 		vnoremap <Return> zA
 		autocmd CmdwinEnter * nunmap <Return>
 		autocmd CmdwinLeave * nnoremap <Return> zA
+		" In the quickfix window, <CR> is used to jump to the error under the
+		" cursor, so undefine the mapping there.
+		autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
 		" move the line with the tag definition at top of window when jumping
-		" map <C-]> <C-]>zt
+		map <C-]> <C-]>zt
 		map g<LeftMouse> g<LeftMouse>zt
 
-	" }
+	" }}}
 
-	" Leader Mappings {
+	" Leader Mappings {{{
 
 		" The default leader is '\', but many people prefer ',' as it's in
 		" a standard location
@@ -130,12 +159,11 @@
 		" edit .vimrc
 		nmap <leader>v :tabedit $MYVIMRC<CR>
 
-	" }
+	" }}}
 
-	" <F2> - <Fx> Mappings {
+	" <F2> - <Fx> Mappings {{{
 
 		" map remove trailing spaces, save all and session save here
-		" TODO breaks last search pattern
 		nmap <F2> :%s/\s\+$//e<CR>:wa<CR>:exe "mks! ".v:this_session<CR>
 		imap <F2> <ESC><F2>
 
@@ -144,9 +172,9 @@
 		map! <F3> <ESC>:wa<CR>
 
 		" map paired tag closing
-		inoremap <F4> </><ESC>2F<yef/pF<xF<i
+		inoremap <F4> </><ESC>m`2F<ye``PF<xF<i
 
-		" toggle taglist (taglist plugin)
+		" toggle tagbar (tagbar plugin)
 		map <F4> :TagbarToggle<CR>
 
 		" toggle paste / nopaste
@@ -159,12 +187,12 @@
 		" php syntax validation
 		map <F8> :!php -l %<CR>
 
-		" open quickfix window, set it modifiable and having number
-		map <F9> :cw<bar>set invmodifiable<bar>set invnumber<CR>
+		" open quickfix window, set number
+		map <F9> :copen<bar>setlocal number<CR>
 
-	" }
+	" }}}
 
-	" Windows and Tabs Switching {
+	" Windows and Tabs Switching {{{
 
 		" Easier moving in tabs
 		map <S-H> gT
@@ -181,10 +209,10 @@
 		" moving (reordering) tabs
 		nnoremap <silent> l :execute 'silent! tabmove ' . tabpagenr()<CR>
 		nnoremap <silent> h :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
-	" }
-" }
+	" }}}
+" }}}
 
-" General {
+" General {{{
 	filetype plugin indent on  	" Automatically detect file types.
 
 	set encoding=utf8			" character encoding used inside Vim
@@ -192,7 +220,7 @@
 	let g:netrw_liststyle=3     " Use tree-mode as default view
 
 
-	" Vim UI {
+	" Vim UI {{{
 
 		colorscheme torte_custom		" my favorite colorscheme
 		autocmd VimResized * wincmd =	" automatically resize win split on window resize
@@ -216,24 +244,39 @@
 										" selected characters/lines in visual mode
 		endif
 
-	" }
+		" Folding {{{
+			function! FoldText()
+				let foldsize = (v:foldend-v:foldstart)
+				return '» ['.foldsize.' lines] » '.v:folddashes.getline(v:foldstart).' → '.getline(v:foldend)
+			endfunction
+			set foldtext=FoldText()
+		" }}}
 
-	" Formatting {
+	" }}}
+
+    " Syntactic {{{
+        set statusline+=%#warningmsg#
+        set statusline+=%{SyntasticStatuslineFlag()}
+        set statusline+=%*
+    " }}}
+
+	" Formatting {{{
 		set shiftwidth=4		" use indents of 4 spaces
 		set tabstop=4 			" an indentation every four columns
 		set smartindent			" smart autoindenting when starting a new line
+        set expandtab
 
-	" }
+	" }}}
 
-" }
+" }}}
 
-" Plugins {
+" Plugins {{{
 
-	" Gundo {
+	" Gundo {{{
 		nnoremap <leader>g :GundoToggle<CR>
-	" }
+	" }}}
 
-	" VCS commands {
+	" VCS commands {{{
 		" by default: <leader>cs
 		nmap <leader>vs :VCSStatus<CR>
 		" by default: <leader>cn
@@ -246,62 +289,53 @@
 		nmap <leader>vu :VCSUpdate<CR>
 		" by default: <leader>cv
 		nmap <leader>vv :VCSVimDiff<CR>
-	" }
+	" }}}
 
-	" JSHint {
-		" by default: <leader>js
-		nmap <leader>js :JSHint<CR>
-	" }
-
-	" php-doc commands {
+	" php-doc commands {{{
 		nnoremap <C-P> :call PhpDocSingle()<CR>
 		vnoremap <C-P> :call PhpDocRange()<CR>
-	" }
+	" }}}
 
-	" TagBar {
-		" open window with tagBar on the left
-		let g:tagbar_left = 1
-		" sort tags by open file
-		let g:tagbar_sort = 0
-		" show kind of function
-		let g:tagbar_show_visibility = 1
-		" make tlist pane active when opened
+	" JSHint {{{
+		" by default: <leader>js
+		nmap <leader>js :JSHint<CR>
+	" }}}
+
+    " Syntactic {{{
+        let g:syntastic_always_populate_loc_list = 1
+        let g:syntastic_auto_loc_list = 1
+        let g:syntastic_check_on_open = 1
+        let g:syntastic_check_on_wq = 0
+    " }}}
+
+	" TagBar {{{
 		let g:tagbar_autofocus = 1
-		" width of window
-		let g:tagbar_width = 35
-		" close tagbar when a selection is made
 		let g:tagbar_autoclose = 1
-		" set visible values for php
 		let g:tagbar_type_php = {
 			\ 'ctagstype' : 'php',
 			\ 'kinds' : [
-				\ 'd:macros:1',
-				\ 'g:enums',
-				\ 't:typedefs:0:0',
-				\ 'e:enumerators:0:0',
-				\ 'n:namespaces',
+				\ 'i:interfaces',
 				\ 'c:classes',
-				\ 's:structs',
-				\ 'u:unions',
-				\ 'f:functions'
-			\ ]
-		\ }
-		" TODO: append support for css and full js
-		" set visible values for php
-		" let g:tagbar_type_css = {
-		"	\ 'ctagstype' : 'css',
-		"   \ 'kinds'     : [
-		"       \ 'c:classes',
-		"       \ 's:selectors',
-		"       \ 'i:identities'
-		"   \ ]
-		"\ }
-	" }
+				\ 'd:constant definitions',
+				\ 'f:functions',
+				\ 'j:javascript functions:1'
+				\ ]
+			\ }
+		let g:tagbar_left = 1
+		let g:tagbar_compact = 1
+		let g:tagbar_width = 30
+		let g:tagbar_zoomwidth = 0
+		let g:tagbar_iconchars = ['▷', '◢']
+	" }}}
 
-" }
+	" NERDTree {{{
+		map <C-n> :NERDTreeToggle<CR>
+	" }}}
 
-" Use local vimrc if available {
+" }}}
+
+" Use local vimrc if available {{{
 	if filereadable(expand("~/.vimrc.local"))
 		source ~/.vimrc.local
 	endif
-" }
+" }}}
