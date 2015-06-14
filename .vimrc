@@ -26,6 +26,7 @@ runtime! debian.vim
 
     " Git plugins
 	Plugin 'tpope/vim-fugitive.git'
+	Plugin 'vim-scripts/vcscommand.vim.git'
 
     " Base plugins
     Plugin 'tpope/vim-eunuch.git'
@@ -36,7 +37,6 @@ runtime! debian.vim
 	Plugin 'sjl/gundo.vim.git'
 	Plugin 'nelstrom/vim-visual-star-search.git'
 	Plugin 'majutsushi/tagbar.git'
-	Plugin 'vim-scripts/vcscommand.vim.git'
 	Plugin 'scrooloose/nerdtree.git'
     Plugin 'scrooloose/syntastic.git'
 
