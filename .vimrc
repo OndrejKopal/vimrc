@@ -46,7 +46,6 @@ runtime! debian.vim
     " Python plugins
     Plugin 'jcrocholl/pep8.git'
     Plugin 'fs111/pydoc.vim.git'
-    Plugin 'mitechie/pyflakes-pathogen.git'
 
     " Js plugins
     Plugin 'Shutnik/jshint2.vim.git'
