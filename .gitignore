@@ -1,9 +1,10 @@
 # ignore vim files
-*.swp
+/**/*.swp
 Session.vim
 
 # ignore netrwhist file
 /.vim/.netrwhist
 
 # ignore bundle modules
-/.vim/bundle
+/.vim/bundle/**
+!/**/.gitignore
