@@ -26,7 +26,6 @@ runtime! debian.vim
 
     " Git plugins
     Plugin 'tpope/vim-fugitive.git'
-    Plugin 'vim-scripts/vcscommand.vim.git'
 
     " Base plugins
     Plugin 'tpope/vim-eunuch.git'
@@ -50,6 +49,10 @@ runtime! debian.vim
     " Js plugins
     Plugin 'Shutnik/jshint2.vim.git'
     Plugin 'kchmck/vim-coffee-script.git'
+
+    " Templating systems
+    Plugin 'evidens/vim-twig.git'
+    Plugin 'xsbeats/vim-blade.git'
 
     " All of your Plugins must be added before the following line
     call vundle#end()            " required
@@ -254,9 +257,9 @@ runtime! debian.vim
     " }}}
 
     " Syntactic {{{
-        set statusline+=%#warningmsg#
-        set statusline+=%{SyntasticStatuslineFlag()}
-        set statusline+=%*
+"        set statusline+=%#warningmsg#
+"        set statusline+=%{SyntasticStatuslineFlag()}
+"        set statusline+=%*
     " }}}
 
     " Formatting {{{
@@ -270,24 +273,16 @@ runtime! debian.vim
 " }}}
 
 " Plugins {{{
-
     " Gundo {{{
         nnoremap <leader>g :GundoToggle<CR>
     " }}}
 
-    " VCS commands {{{
-        " by default: <leader>cs
-        nmap <leader>vs :VCSStatus<CR>
-        " by default: <leader>cn
-        nmap <leader>vb :VCSBlame<CR>
-        " by default: <leader>cd
-        nmap <leader>vd :VCSDiff<CR>
-        " by default: <leader>cl
-        nmap <leader>vl :VCSLog<CR>
-        " by default: <leader>cu
-        nmap <leader>vu :VCSUpdate<CR>
-        " by default: <leader>cv
-        nmap <leader>vv :VCSVimDiff<CR>
+    " Fugitive commands {{{
+        set diffopt+=vertical
+        nmap <leader>vc :Gcommit<CR>
+        nmap <leader>vb :Gblame<CR>
+        nmap <leader>vs :Gstatus<CR>
+        nmap <leader>vv :Gdiff<CR>
     " }}}
 
     " php-doc commands {{{
@@ -296,15 +291,14 @@ runtime! debian.vim
     " }}}
 
     " JSHint {{{
-        " by default: <leader>js
         nmap <leader>js :JSHint<CR>
     " }}}
 
     " Syntactic {{{
-        let g:syntastic_always_populate_loc_list = 1
-        let g:syntastic_auto_loc_list = 1
-        let g:syntastic_check_on_open = 1
-        let g:syntastic_check_on_wq = 0
+"        let g:syntastic_always_populate_loc_list = 1
+"        let g:syntastic_auto_loc_list = 1
+"        let g:syntastic_check_on_open = 1
+"        let g:syntastic_check_on_wq = 0
     " }}}
 
     " TagBar {{{
