@@ -246,6 +246,14 @@ runtime! debian.vim
                                         " selected characters/lines in visual mode
         endif
 
+        " Set Tag file {{{
+            function! SetTagFile()
+                let gitDir = :!git rev-parse --git-dir
+                return gitDir . '/tags';
+            endfunction
+            set tags=SetTagFile()
+        " }}}
+
         " Folding {{{
             function! FoldText()
                 let foldsize = (v:foldend-v:foldstart)
