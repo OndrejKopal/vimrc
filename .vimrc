@@ -54,6 +54,9 @@ runtime! debian.vim
     Plugin 'evidens/vim-twig.git'
     Plugin 'xsbeats/vim-blade.git'
 
+    " EditorConfig (http://editorconfig.org/)
+    Plugin 'editorconfig/editorconfig-vim.git'
+
     " All of your Plugins must be added before the following line
     call vundle#end()            " required
     filetype plugin indent on    " required
@@ -236,7 +239,6 @@ runtime! debian.vim
         set wildmenu                    " show list instead of just completing
         set wildmode=list:longest,full  " command <Tab> completion, list matches, then longest common part, then all.
         set scrolloff=3                 " minimum lines to keep above and below cursor
-        set colorcolumn=80              " colorize 80th column (requires vim >= 7.3)
         set tabpagemax=30               " open max 30 tabs with vim -p * (default is 10)
 
         if has('cmdline_info')
@@ -265,17 +267,17 @@ runtime! debian.vim
     " }}}
 
     " Syntactic {{{
-"        set statusline+=%#warningmsg#
-"        set statusline+=%{SyntasticStatuslineFlag()}
-"        set statusline+=%*
+        " set statusline+=%#warningmsg#
+        " set statusline+=%{SyntasticStatuslineFlag()}
+        " set statusline+=%*
     " }}}
 
+    " Obsolete formatting: now used .editorconfig
     " Formatting {{{
-        set shiftwidth=4        " use indents of 4 spaces
-        set tabstop=4           " an indentation every four columns
-        set smartindent         " smart autoindenting when starting a new line
-        set expandtab
-
+        " set shiftwidth=4        " use indents of 4 spaces
+        " set tabstop=4           " an indentation every four columns
+        " set smartindent         " smart autoindenting when starting a new line
+        " set expandtab
     " }}}
 
 " }}}
@@ -331,6 +333,11 @@ runtime! debian.vim
 
     " NERDTree {{{
         map <C-n> :NERDTreeToggle<CR>
+    " }}}
+
+    " EditorConfig {{{
+        let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+        let g:EditorConfig_exec_path = '~/.editorconfig'
     " }}}
 
 " }}}

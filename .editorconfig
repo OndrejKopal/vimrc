@@ -1,0 +1,23 @@
+# editor's configuration
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+tab_width = 4
+indent_size = 4
+indent_style = space
+max_line_length = 120
+trim_trailing_whitespace = true
+insert_final_newline = false
+
+[*.{js, json}]
+indent_size = 2
+insert_final_newline = true
+
+[*.less]
+indent_style = tab
+
+[*.{md,markdown}]
+max_line_length = 0
+trim_trailing_whitespace = false
