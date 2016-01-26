@@ -3,6 +3,10 @@
 My personal vim configuration being used on my laptop as well as on servers I
 have to deal with. Optimized for PYTHON, PHP and JS.
 
+## Editor configuration
+
+The config uses .editorconfig
+
 ## Hotkeys
 
 The config uses a lot of various key bindings. For full list see the `.vimrc` file directly=)
