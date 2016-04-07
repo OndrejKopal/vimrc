@@ -1,4 +1,4 @@
 # Vundle plugin (managing vim plugins)
-[submodule "Vundle"]
-    path = .vim/bundle/Vundle.vim
-    url = https://github.com/gmarik/Vundle.vim.git
+[submodule ".vim/bundle/Vundle.vim"]
+	path = .vim/bundle/Vundle.vim
+	url = http://github.com/GMarik/Vundle.vim.git
