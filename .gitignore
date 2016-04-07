@@ -6,4 +6,6 @@ Session.vim
 .netrwhist
 
 # ignore bundle modules
+/.vim/bundle
+!/.vim/bundle/Vundle.vim
 .gitignore
