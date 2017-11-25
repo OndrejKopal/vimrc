@@ -33,7 +33,7 @@ runtime! debian.vim
     Plugin 'tpope/vim-surround.git'
     Plugin 'tpope/vim-unimpaired.git'
     Plugin 'tpope/vim-speeddating.git'
-    Plugin 'sjl/gundo.vim.git'
+    Plugin 'mbbill/undotree.git'
     Plugin 'nelstrom/vim-visual-star-search.git'
     Plugin 'majutsushi/tagbar.git'
     Plugin 'scrooloose/nerdtree.git'
@@ -283,8 +283,13 @@ runtime! debian.vim
 " }}}
 
 " Plugins {{{
-    " Gundo {{{
-        nnoremap <leader>g :GundoToggle<CR>
+    " Undotree with persistent history {{{
+        nnoremap <leader>g :UndotreeToggle<CR>
+
+        if has("persistent_undo")
+            set undodir=~/.vim_undodir/
+            set undofile
+        endif
     " }}}
 
     " Fugitive commands {{{
