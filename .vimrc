@@ -37,7 +37,7 @@ runtime! debian.vim
     Plugin 'nelstrom/vim-visual-star-search.git'
     Plugin 'majutsushi/tagbar.git'
     Plugin 'scrooloose/nerdtree.git'
-    " Plugin 'scrooloose/syntastic.git'
+    Plugin 'vim-syntastic/syntastic'
 
     " Php plugins
     Plugin 'sumpygump/php-documentor-vim.git'
@@ -267,9 +267,9 @@ runtime! debian.vim
     " }}}
 
     " Syntactic {{{
-        " set statusline+=%#warningmsg#
-        " set statusline+=%{SyntasticStatuslineFlag()}
-        " set statusline+=%*
+        set statusline+=%#warningmsg#
+        set statusline+=%{SyntasticStatuslineFlag()}
+        set statusline+=%*
     " }}}
 
     " Obsolete formatting: now used .editorconfig
@@ -292,6 +292,24 @@ runtime! debian.vim
         endif
     " }}}
 
+    " Syntactic {{{
+        let g:syntastic_always_populate_loc_list = 1
+        let g:syntastic_auto_loc_list = 1
+        let g:syntastic_check_on_open = 1
+        let g:syntastic_check_on_wq = 0
+        " checkers
+        let g:syntastic_javascript_checkers = ['eslint']
+        let g:syntastic_typescript_checkers = ['tslint']
+        let g:syntastic_html_tidy_ignore_errors = [
+                \ 'proprietary attribute',
+                \ 'proprietary attribute "(',
+                \ 'is not recognized!',
+                \ 'discarding unexpected'
+            \ ]
+        let g:syntastic_javascript_eslint_exe = 'npm run eslint --'
+        let g:syntastic_javascript_tslint_exe = 'tslint --'
+    " }}}
+
     " Fugitive commands {{{
         set diffopt+=vertical
         nmap <leader>vc :Gcommit<CR>
@@ -305,15 +323,6 @@ runtime! debian.vim
         vnoremap <C-P> :call PhpDocRange()<CR>
     " }}}
 
-    " JSHint {{{
-        nmap <leader>js :JSHint<CR>
-    " }}}
-
-    " Syntactic {{{
-"        let g:syntastic_always_populate_loc_list = 1
-"        let g:syntastic_auto_loc_list = 1
-"        let g:syntastic_check_on_open = 1
-"        let g:syntastic_check_on_wq = 0
     " }}}
 
     " TagBar {{{
