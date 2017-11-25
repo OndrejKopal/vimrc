@@ -6,7 +6,6 @@
 
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages available in Debian.
-runtime! debian.vim
 
 " Vundle ... {{{
     set nocompatible              " be iMproved, required
@@ -38,17 +37,17 @@ runtime! debian.vim
     Plugin 'majutsushi/tagbar.git'
     Plugin 'scrooloose/nerdtree.git'
     Plugin 'vim-syntastic/syntastic'
+    Plugin 'ternjs/tern_for_vim'
+
+    " Typescript plugins
+    Plugin 'leafgarland/typescript-vim'
+    Plugin 'HerringtonDarkholme/yats.vim'
 
     " Php plugins
     Plugin 'sumpygump/php-documentor-vim.git'
 
-    " Python plugins
-    Plugin 'jcrocholl/pep8.git'
-    Plugin 'fs111/pydoc.vim.git'
-
     " Js plugins
-    Plugin 'Shutnik/jshint2.vim.git'
-    Plugin 'kchmck/vim-coffee-script.git'
+    Plugin 'mxw/vim-jsx'
 
     " Templating systems
     Plugin 'evidens/vim-twig.git'
@@ -274,10 +273,10 @@ runtime! debian.vim
 
     " Obsolete formatting: now used .editorconfig
     " Formatting {{{
-        " set shiftwidth=4        " use indents of 4 spaces
-        " set tabstop=4           " an indentation every four columns
-        " set smartindent         " smart autoindenting when starting a new line
-        " set expandtab
+        set shiftwidth=4        " use indents of 4 spaces
+        set tabstop=4           " an indentation every four columns
+        set smartindent         " smart autoindenting when starting a new line
+        set expandtab
     " }}}
 
 " }}}
@@ -323,6 +322,8 @@ runtime! debian.vim
         vnoremap <C-P> :call PhpDocRange()<CR>
     " }}}
 
+    " React {{{
+        let g:jsx_ext_required = 0 " Allow JSX in normal JS files
     " }}}
 
     " TagBar {{{
@@ -355,6 +356,8 @@ runtime! debian.vim
     " }}}
 
 " }}}
+
+" execute pathogen#infect()
 
 " Use local vimrc if available {{{
     if filereadable(expand("~/.vimrc.local"))
