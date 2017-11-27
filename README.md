@@ -14,6 +14,12 @@ Note: `<leader>` is set to the comma (`,`) key.
 
  - `<leader>/` - unhighlight the last search occurrences
 
+## Kotlin syntax checkers
+
+```
+$ cp -r syntax_checkers/kotlin ~/.vim/syntax_checkers/
+```
+
 ## Devel Info
 
 Based on Ikar (http://github.com/porn) and Josef (http://github.com/josef-spak) configuration.
