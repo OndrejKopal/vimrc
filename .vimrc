@@ -1,6 +1,5 @@
 " Notes {{{
 "       Hosted on github: https://github.com/OndrejKopal/vimrc
-"
 "       based on: https://github.com/porn/vimrc
 " }}}
 
@@ -36,28 +35,21 @@
     Plugin 'nelstrom/vim-visual-star-search.git'
     Plugin 'majutsushi/tagbar.git'
     Plugin 'scrooloose/nerdtree.git'
-    Plugin 'vim-syntastic/syntastic'
-    Plugin 'ternjs/tern_for_vim'
+    " Plugin 'Valloric/YouCompleteMe'
+
+    " syntaxe
+    Plugin 'w0rp/ale'
 
     " Typescript plugins
+    Plugin 'Quramy/tsuquyomi'
     Plugin 'leafgarland/typescript-vim'
     Plugin 'HerringtonDarkholme/yats.vim'
-
-    " Php plugins
-    Plugin 'sumpygump/php-documentor-vim.git'
 
     " Js plugins
     Plugin 'mxw/vim-jsx'
 
-    " Templating systems
-    Plugin 'evidens/vim-twig.git'
-    Plugin 'xsbeats/vim-blade.git'
-
     " EditorConfig (http://editorconfig.org/)
     Plugin 'editorconfig/editorconfig-vim.git'
-
-    " Kotlin plugins
-    Plugin 'udalov/kotlin-vim'
 
     " All of your Plugins must be added before the following line
     call vundle#end()            " required
@@ -71,16 +63,11 @@
     "
     " see :h vundle for more details or wiki for FAQ
     " Put your non-Plugin stuff after this line
-
 " }}}
 
 " TODO unsorted ... {{{
     " map %% to dir name of currently active buffer file
     cnoremap <expr> %%  getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-
-    " php function text object
-    vnoremap af :<C-U>normal va{Vo{<CR>
-    omap af :normal Vaf<CR>
 
     set modeline
     set runtimepath+=~/.vim/
@@ -100,13 +87,10 @@
     if has("autocmd")
         autocmd BufWritePost .vimrc source $MYVIMRC
     endif
-
 " }}}
 
 " Key Mappings {{{
-
     " Other {{{
-
         " vimdiff upon: "W11: Warning: File xxx has changed since editing started"
         " taken from: http://stackoverflow.com/questions/8491110
         command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
@@ -145,13 +129,10 @@
         " move the line with the tag definition at top of window when jumping
         map <C-]> <C-]>zt
         map g<LeftMouse> g<LeftMouse>zt
-
     " }}}
 
     " Leader Mappings {{{
-
-        " The default leader is '\', but many people prefer ',' as it's in
-        " a standard location
+        " The default leader is '\', but many people prefer ',' as it's in a standard location
         let mapleader = ','
 
         " code folding
@@ -165,11 +146,9 @@
 
         " edit .vimrc
         nmap <leader>v :tabedit $MYVIMRC<CR>
-
     " }}}
 
     " <F2> - <Fx> Mappings {{{
-
         " map remove trailing spaces, save all and session save here
         nmap <F2> :%s/\s\+$//e<CR>:wa<CR>:exe "mks! ".v:this_session<CR>
         imap <F2> <ESC><F2>
@@ -191,16 +170,11 @@
         " toggle wrap / nowrap
         map <F6> :set invwrap<bar>set wrap?<CR>
 
-        " php syntax validation
-        map <F8> :!php -l %<CR>
-
         " open quickfix window, set number
         map <F9> :copen<bar>setlocal number<CR>
-
     " }}}
 
     " Windows and Tabs Switching {{{
-
         " Easier moving in tabs
         map <S-H> gT
         map <S-L> gt
@@ -228,7 +202,6 @@
 
 
     " Vim UI {{{
-
         colorscheme torte_custom        " my favorite colorscheme
         autocmd VimResized * wincmd =   " automatically resize win split on window resize
 
@@ -250,14 +223,6 @@
                                         " selected characters/lines in visual mode
         endif
 
-        " Set Tag file {{{
-            function! SetTagFile()
-                let gitDir = :!git rev-parse --git-dir
-                return gitDir . '/tags';
-            endfunction
-            set tags=SetTagFile()
-        " }}}
-
         " Folding {{{
             function! FoldText()
                 let foldsize = (v:foldend-v:foldstart)
@@ -266,12 +231,6 @@
             set foldtext=FoldText()
         " }}}
 
-    " }}}
-
-    " Syntactic {{{
-        set statusline+=%#warningmsg#
-        set statusline+=%{SyntasticStatuslineFlag()}
-        set statusline+=%*
     " }}}
 
     " Obsolete formatting: now used .editorconfig
@@ -294,22 +253,46 @@
         endif
     " }}}
 
-    " Syntactic {{{
-        let g:syntastic_always_populate_loc_list = 1
-        let g:syntastic_auto_loc_list = 1
-        let g:syntastic_check_on_open = 1
-        let g:syntastic_check_on_wq = 0
-        " checkers
-        let g:syntastic_javascript_checkers = ['eslint']
-        let g:syntastic_typescript_checkers = ['tslint']
-        let g:syntastic_html_tidy_ignore_errors = [
-                \ 'proprietary attribute',
-                \ 'proprietary attribute "(',
-                \ 'is not recognized!',
-                \ 'discarding unexpected'
-            \ ]
-        let g:syntastic_javascript_eslint_exe = 'npm run eslint --'
-        let g:syntastic_javascript_tslint_exe = 'tslint --'
+    " YouCompleteMe {{{
+    "     let g:ycm_auto_trigger = 0
+    " }}}
+
+    " Tsuquyomi (tools for typescript) {{{
+        nmap <leader>m :TsuImport<CR>
+
+        let g:tsuquyomi_search_term_min_length = 3
+        let g:tsuquyomi_disable_default_mappings = 1
+        let g:tsuquyomi_disable_quickfix = 1
+    " }}}
+
+    " Ale (Asynchronous Lint Engine) {{{
+        let g:ale_echo_msg_error_str = 'E'
+        let g:ale_echo_msg_warning_str = 'W'
+        let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+        let g:ale_lint_on_text_changed = 'never'
+        let g:ale_lint_on_save = 1
+        let g:ale_linters = {
+        \   'css': ['stylelint'],
+        \   'dockerfile': ['hadolint'],
+        \   'go': ['golint'],
+        \   'html': ['htmlhimt'],
+        \   'javascript': ['eslint'],
+        \   'json': ['jsonlint'],
+        \   'sass': ['stylelint'],
+        \   'scss': ['stylelint'],
+        \   'sh': ['shell','shellcheck'],
+        \   'typescript': ['tslint','typecheck'],
+        \   'yaml': ['yamllint']
+        \}
+        let g:ale_fixers = {
+        \   'javascript': ['eslint'],
+        \   'typescript': ['tslint']
+        \}
+        let g:ale_fix_on_save = 1
+        let g:ale_pattern_options = {
+        \   '\.min\.js$': {'ale_linters': [], 'ale_fixers': []},
+        \   '\.min\.css$': {'ale_linters': [], 'ale_fixers': []},
+        \}
     " }}}
 
     " Fugitive commands {{{
@@ -318,11 +301,6 @@
         nmap <leader>vb :Gblame<CR>
         nmap <leader>vs :Gstatus<CR>
         nmap <leader>vv :Gdiff<CR>
-    " }}}
-
-    " php-doc commands {{{
-        nnoremap <C-P> :call PhpDocSingle()<CR>
-        vnoremap <C-P> :call PhpDocRange()<CR>
     " }}}
 
     " React {{{
@@ -357,7 +335,6 @@
         let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
         let g:EditorConfig_exec_path = '~/.editorconfig'
     " }}}
-
 " }}}
 
 " execute pathogen#infect()
